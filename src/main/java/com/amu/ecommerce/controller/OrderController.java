@@ -1,16 +1,16 @@
  package com.amu.ecommerce.controller;
 
 import com.amu.ecommerce.dto.OrderRequest;
+import com.amu.ecommerce.dto.OrderResponse;
 import com.amu.ecommerce.service.OrderService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-@RestController
+import java.util.List;
+
+ @RestController
 @RequestMapping("/api/v1/orders")
 @RequiredArgsConstructor
 public class OrderController {
@@ -22,5 +22,10 @@ public class OrderController {
             @RequestBody @Valid OrderRequest request) {
 
         return ResponseEntity.ok(service.createdOrder(request));
+    }
+
+    @GetMapping
+     public ResponseEntity<List<OrderResponse>> findAll(){
+        return ResponseEntity.ok(service.findAll());
     }
 }

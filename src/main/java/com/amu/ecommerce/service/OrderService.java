@@ -4,6 +4,7 @@ import com.amu.ecommerce.client.CustomerClient;
 import com.amu.ecommerce.client.ProductClient;
 import com.amu.ecommerce.dto.OrderLineRequest;
 import com.amu.ecommerce.dto.OrderRequest;
+import com.amu.ecommerce.dto.OrderResponse;
 import com.amu.ecommerce.dto.PurchaseRequest;
 import com.amu.ecommerce.exception.BusinessException;
 import com.amu.ecommerce.kafka.OrderConfirmation;
@@ -13,6 +14,9 @@ import com.amu.ecommerce.repositories.OrderRepository;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -58,4 +62,10 @@ public class OrderService {
         return order.getId();
     }
 
+    public List<OrderResponse> findAll() {
+        return repository.findAll()
+                .stream()
+                .map(mapper::fromOrder)
+                .collect(Collectors.toList());
+    }
 }
