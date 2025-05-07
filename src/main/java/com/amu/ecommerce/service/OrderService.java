@@ -11,6 +11,7 @@ import com.amu.ecommerce.kafka.OrderConfirmation;
 import com.amu.ecommerce.kafka.OrderProducer;
 import com.amu.ecommerce.mapper.OrderMapper;
 import com.amu.ecommerce.repositories.OrderRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -67,5 +68,11 @@ public class OrderService {
                 .stream()
                 .map(mapper::fromOrder)
                 .collect(Collectors.toList());
+    }
+
+    public OrderResponse findById(Integer orderId) {
+        return repository.findById(orderId)
+                .map(mapper::fromOrder)
+                .orElseThrow(() -> new EntityNotFoundException("Cannot find order::" + orderId));
     }
 }
