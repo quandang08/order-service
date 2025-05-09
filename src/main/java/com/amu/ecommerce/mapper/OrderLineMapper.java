@@ -1,6 +1,7 @@
 package com.amu.ecommerce.mapper;
 
 import com.amu.ecommerce.dto.OrderLineRequest;
+import com.amu.ecommerce.dto.OrderLineResponse;
 import com.amu.ecommerce.entities.Order;
 import com.amu.ecommerce.entities.OrderLine;
 import org.springframework.stereotype.Service;
@@ -19,5 +20,9 @@ public class OrderLineMapper {
                 )
                 .productId(request.productId())
                 .build();
+    }
+
+    public OrderLineResponse toOrderLineResponse(OrderLine orderLine) {
+        return new OrderLineResponse(orderLine.getId(), orderLine.getQuantity());
     }
 }
