@@ -1,4 +1,4 @@
-package com.amu.order.client;
+package com.amu.order.client.customer;
 
 import com.amu.order.dto.CustomerResponse;
 import org.springframework.cloud.openfeign.FeignClient;

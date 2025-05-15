@@ -1,4 +1,4 @@
-package com.amu.order.client;
+package com.amu.order.client.product;
 
 import com.amu.order.dto.PurchaseRequest;
 import com.amu.order.dto.PurchaseResponse;
