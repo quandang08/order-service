@@ -1,6 +1,8 @@
 package com.amu.order.service;
 
 import com.amu.order.client.customer.CustomerClient;
+import com.amu.order.client.payment.PaymentClient;
+import com.amu.order.client.payment.PaymentRequest;
 import com.amu.order.client.product.ProductClient;
 import com.amu.order.dto.OrderLineRequest;
 import com.amu.order.dto.OrderRequest;
@@ -28,6 +30,7 @@ public class OrderService {
     private final OrderMapper mapper;
     private final OrderLineService orderLineService;
     private final OrderProducer orderProducer;
+    private final PaymentClient paymentClient;
 
     public Integer createdOrder(@Valid OrderRequest request) {
         //check customer
@@ -48,6 +51,15 @@ public class OrderService {
                     )
             );
         }
+
+        var paymentRequest = new PaymentRequest(
+                request.totalAmount(),
+                request.paymentMethod(),
+                order.getId(),
+                order.getReference(),
+                customer
+        );
+        paymentClient.requestOrderPayment(paymentRequest);
 
         //start payment process
         orderProducer.sendOrderConfirmation(
