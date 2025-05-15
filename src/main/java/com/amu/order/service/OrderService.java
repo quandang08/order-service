@@ -1,7 +1,7 @@
 package com.amu.order.service;
 
-import com.amu.order.client.CustomerClient;
-import com.amu.order.client.ProductClient;
+import com.amu.order.client.customer.CustomerClient;
+import com.amu.order.client.product.ProductClient;
 import com.amu.order.dto.OrderLineRequest;
 import com.amu.order.dto.OrderRequest;
 import com.amu.order.dto.OrderResponse;
